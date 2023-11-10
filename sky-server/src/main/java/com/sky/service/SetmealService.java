@@ -1,13 +1,12 @@
 package com.sky.service;
 
-import com.sky.dto.EmployeeDTO;
-import com.sky.dto.EmployeeLoginDTO;
-import com.sky.dto.EmployeePageQueryDTO;
-import com.sky.dto.SetmealDTO;
+import com.sky.dto.*;
 import com.sky.entity.Employee;
 import com.sky.entity.SetmealDish;
 import com.sky.result.PageResult;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public interface SetmealService {
@@ -20,4 +19,17 @@ public interface SetmealService {
     void insertWithDish(SetmealDTO setmealDTO);
 
 
+    /**
+     * 套餐分页查询
+     * @param setmealPageQueryDTO
+     * @return
+     */
+    PageResult pageQuery(SetmealPageQueryDTO setmealPageQueryDTO);
+
+    /**
+     * 批量删除套餐
+     * @param ids
+     * @return
+     */
+    void delectSetmeal(List<Long> ids);
 }
