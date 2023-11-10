@@ -19,17 +19,17 @@
 
     <select id="pageQuery" resultType="com.sky.vo.SetmealVO">
         select s.* , c.`name` as categoryName from setmeal s left outer join category c on s.category_id = c.id
-<!--        <where>-->
-<!--            <if test="name != null and name != '">-->
-<!--                and s.name like concat('%',#{name},'%')-->
-<!--            </if>-->
-<!--            <if test="categoryId != null and categoryId != ''">-->
-<!--                and s.category_id = #{categoryId}-->
-<!--            </if>-->
-<!--            <if test="status != null and status != ''">-->
-<!--                and s.status = #{status}-->
-<!--            </if>-->
-<!--        </where>-->
+        <where>
+            <if test="name != null and name != ''">
+                and s.name like concat('%',#{name},'%')
+            </if>
+            <if test="categoryId != null and categoryId != ''">
+                and s.category_id = #{categoryId}
+            </if>
+            <if test="status != null and status != ''">
+                and s.status = #{status}
+            </if>
+        </where>
         order by s.create_time desc
     </select>
 

@@ -9,6 +9,7 @@ import com.sky.result.Result;
 import com.sky.service.DishService;
 import com.sky.service.SetmealService;
 import com.sky.vo.DishVO;
+import com.sky.vo.SetmealVO;
 import io.lettuce.core.ConnectionEvents;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -66,6 +67,19 @@ public class SetmealController {
         log.info("套餐批量删除:{}",ids);
         setmealService.delectSetmeal(ids);
         return Result.success();
+    }
+
+    /**
+     * 根据套餐ID查询菜品信息
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    @ApiOperation(value = "根据套餐ID查询菜品信息")
+    public Result<SetmealVO> getById(@PathVariable Long id){
+        log.info("根据套餐ID查询菜品信息:{}",id);
+        SetmealVO setmealVO = setmealService.getById(id);
+        return Result.success(setmealVO);
     }
 
 

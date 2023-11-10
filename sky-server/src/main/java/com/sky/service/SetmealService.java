@@ -4,6 +4,7 @@ import com.sky.dto.*;
 import com.sky.entity.Employee;
 import com.sky.entity.SetmealDish;
 import com.sky.result.PageResult;
+import com.sky.vo.SetmealVO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,4 +33,11 @@ public interface SetmealService {
      * @return
      */
     void delectSetmeal(List<Long> ids);
+
+    /**
+     * 根据套餐ID查询菜品信息
+     * @param id
+     * @return
+     */
+    SetmealVO getById(Long id);
 }
