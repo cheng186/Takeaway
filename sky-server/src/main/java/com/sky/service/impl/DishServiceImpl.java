@@ -16,7 +16,6 @@ import com.sky.result.PageResult;
 import com.sky.service.DishService;
 import com.sky.vo.DishVO;
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -153,6 +152,21 @@ public class DishServiceImpl implements DishService {
             });
             dishFlavorMapper.insertBatch(flavors);
         }
+    }
+    /**
+     * 根据分类id查询菜品数据
+     *
+     * @param categoryId
+     * @return
+     */
+    public List<Dish> getDishBycategotyId(Long categoryId) {
+        //根据分类id查询菜品数据
+        Dish dish = Dish.builder()
+                .categoryId(categoryId)
+                .status(StatusConstant.ENABLE)
+                .build();
+//        Dish dishes=dishMapper.getDishBycategotyId(categoryId);
+        return dishMapper.list(dish);
     }
 
 
