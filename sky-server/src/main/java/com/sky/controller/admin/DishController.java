@@ -101,4 +101,17 @@ public class DishController {
         List<Dish> list = dishService.getDishBycategotyId(categoryId);
         return Result.success(list);
     }
+
+    /**
+     * 设置菜品启停售
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    public Result isStatus(@PathVariable Integer status, Long id){
+        log.info("设置菜品启停售:{}",id);
+        dishService.updateStatus(status,id);
+        return Result.success();
+    }
 }
