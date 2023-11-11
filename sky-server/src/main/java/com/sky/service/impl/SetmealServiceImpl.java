@@ -90,19 +90,44 @@ public class SetmealServiceImpl implements SetmealService{
                 throw new DeletionNotAllowedException(MessageConstant.SETMEAL_ON_SALE);
             }
         }
-        setmealMapper.delectByIds(ids);
-        setmealDishMapper.delectByIds(ids);
+//        ids.forEach(setmealId -> {
+            setmealMapper.delectByIds(ids);
+            setmealDishMapper.delectByIds(ids);
+//        });
     }
 
     /**
-     * 根据套餐ID查询菜品信息
-     * @param id
+     * 根据套餐ID查询菜品信息,回显
+     * @param setmealId
      * @return
      */
-    public SetmealVO getById(Long id) {
-        Setmeal setmeal = setmealMapper.getById(id);
+    public SetmealVO getById(Long setmealId) {
+        Setmeal setmeal = setmealMapper.getById(setmealId);
         SetmealVO setmealVO = new SetmealVO();
+        List<SetmealDish> setmealDishes = setmealDishMapper.getDishBySetmealIds(setmealId);
+
         BeanUtils.copyProperties(setmeal,setmealVO);
+        setmealVO.setSetmealDishes(setmealDishes);
+
         return setmealVO;
+    }
+
+    /**
+     * 修改套餐数据
+     * @param setmealDTO
+     * @return
+     */
+    public void update(SetmealDTO setmealDTO) {
+        Setmeal setmeal = new Setmeal();
+        BeanUtils.copyProperties(setmealDTO,setmeal);
+        setmealMapper.update(setmeal);
+        setmealDishMapper.delectById(setmeal.getId());
+
+        List<SetmealDish> dishes = setmealDTO.getSetmealDishes();
+
+        dishes.forEach(setmealDish -> {
+            setmealDish.setSetmealId(setmealDTO.getId());
+        });
+        setmealDishMapper.insertDish(dishes);
     }
 }
