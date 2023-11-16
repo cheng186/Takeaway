@@ -11,3 +11,7 @@ sky:
     access-key-secret: EcPNHjYWUMJju4wB0QqXCz5DEIS5S2
     endpoint: oss-cn-beijing.aliyuncs.com
     bucket-name: web-sky-cbw
+  redis:
+    host: localhost
+    port: 6379
+    database: 1
