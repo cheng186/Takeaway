@@ -103,9 +103,7 @@ public class DishController {
     public Result update(@RequestBody DishDTO dishDTO){
         log.info("修改菜品信息:{}",dishDTO);
         dishService.updateWithFlavor(dishDTO);
-
         cleanCache("dish_*");
-
         return Result.success();
     }
 
